@@ -11,7 +11,7 @@ provider "spacelift" {
 }
 
 import {
-  to = aws_instance.example
+  to = spacelift_stack.aws_fastapi
   id = "aws-fastapi"
 }
 
