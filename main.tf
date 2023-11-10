@@ -10,10 +10,6 @@ terraform {
 provider "spacelift" {
 }
 
-import {
-  to = spacelift_stack.aws_fastapi
-  id = "aws-fastapi"
-}
 
 resource "spacelift_stack" "aws_fastapi" {
   name         = "AWS Fastapi"
