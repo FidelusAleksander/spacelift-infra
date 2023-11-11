@@ -33,4 +33,7 @@ module "aws_fastapi_integration" {
   source    = "./modules/aws_integration"
   role_name = "aws-fastapi-spacelift-integration"
   stack_id  = spacelift_stack.aws_fastapi.id
+  iam_policy_arns = [
+    "arn:aws:iam::aws:policy/AdministratorAccess"
+  ]
 }
