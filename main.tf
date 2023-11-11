@@ -10,6 +10,10 @@ terraform {
 provider "spacelift" {
 }
 
+provider "aws" {
+  region = "eu-west-1"
+}
+
 
 resource "spacelift_stack" "aws_fastapi" {
   name         = "AWS Fastapi"
