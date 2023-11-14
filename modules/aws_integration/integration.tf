@@ -11,7 +11,7 @@ data "spacelift_aws_integration_attachment_external_id" "my_stack" {
   stack_id       = var.stack_id
   read           = true
   write          = true
-  space_id       = "root"
+  space_id       = var.space_id
 }
 
 

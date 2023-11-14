@@ -12,3 +12,8 @@ variable "iam_policy_arns" {
   type        = list(string)
   description = "A list of IAM policy ARNs to attach to the IAM role"
 }
+
+variable "space_id" {
+  type        = string
+  description = "The ID of the Spacelift space to which the Integration will be attached"
+}

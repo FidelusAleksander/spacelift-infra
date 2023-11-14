@@ -38,4 +38,5 @@ module "aws_fastapi_integration" {
   iam_policy_arns = [
     "arn:aws:iam::aws:policy/AdministratorAccess"
   ]
+  space_id = spacelift_stack.aws_fastapi.space_id
 }
