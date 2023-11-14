@@ -13,14 +13,7 @@ module "networking_integration" {
   role_name = "networking-spacelift-integration"
   stack_id  = spacelift_stack.networking.id
   iam_policy_arns = [
-    "arn:aws:iam::aws:policy/AdministratorAccess"
+    "arn:aws:iam::aws:policy/AmazonVPCFullAccess"
   ]
   space_id = spacelift_space.workloads-dev.id
-}
-
-resource "spacelift_aws_integration_attachment" "networking_attachment" {
-  integration_id = module.networking_integration.integration_id
-  stack_id       = spacelift_stack.networking.id
-  read           = true
-  write          = true
 }
