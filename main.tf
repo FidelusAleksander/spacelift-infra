@@ -27,7 +27,7 @@ resource "spacelift_stack" "aws_fastapi" {
   project_root = "infra"
   branch       = "master"
   autodeploy   = true
-  space_id = "root"
+  space_id     = "root"
 
 }
 
