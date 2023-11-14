@@ -5,7 +5,6 @@ resource "spacelift_stack" "storage" {
   project_root = "storage"
   branch       = "master"
   autodeploy   = true
-  autoretry    = true
   space_id     = spacelift_space.workloads-dev.id
 }
 
