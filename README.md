@@ -1,4 +1,4 @@
-# spacelift-infra
+# Spacelift Infrastructure Manager
 
 Manages my Spacelift Infrastructure:
-e.g the stack for https://github.com/FidelusAleksander/aws-fastapi repository
+e.g all the stacks and aws integrations for https://github.com/FidelusAleksander/spacelift-aws-demo repository
