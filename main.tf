@@ -39,3 +39,10 @@ module "aws_fastapi_integration" {
   ]
   space_id = spacelift_space.workloads-dev.id
 }
+
+resource "spacelift_aws_integration_attachment" "aws_fastapi_attachment" {
+  integration_id = module.aws_fastapi_integration.integration_id
+  stack_id       = spacelift_stack.aws_fastapi.id
+  read           = true
+  write          = true
+}

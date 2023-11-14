@@ -13,16 +13,3 @@ data "spacelift_aws_integration_attachment_external_id" "my_stack" {
   read           = true
   write          = true
 }
-
-# Attach the integration to any stacks or modules that need to use it
-resource "spacelift_aws_integration_attachment" "my_stack" {
-  integration_id = spacelift_aws_integration.this.id
-  stack_id       = var.stack_id
-  read           = true
-  write          = true
-
-  # The role needs to exist before we attach since we test role assumption during attachment.
-  depends_on = [
-    aws_iam_role.this
-  ]
-}
