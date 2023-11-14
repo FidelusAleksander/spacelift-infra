@@ -18,10 +18,3 @@ module "storage_integration" {
   ]
   space_id = spacelift_space.workloads-dev.id
 }
-
-resource "spacelift_aws_integration_attachment" "storage_attachment" {
-  integration_id = module.storage_integration.integration_id
-  stack_id       = spacelift_stack.storage.id
-  read           = true
-  write          = true
-}
