@@ -27,8 +27,7 @@ resource "spacelift_stack" "aws_fastapi" {
   project_root = "infra"
   branch       = "master"
   autodeploy   = true
-  space_id     = "root"
-
+  space_id     = spacelift_space.workloads-dev.id
 }
 
 module "aws_fastapi_integration" {
@@ -38,5 +37,5 @@ module "aws_fastapi_integration" {
   iam_policy_arns = [
     "arn:aws:iam::aws:policy/AdministratorAccess"
   ]
-  space_id = spacelift_stack.aws_fastapi.space_id
+  space_id = spacelift_space.workloads-dev.id
 }
