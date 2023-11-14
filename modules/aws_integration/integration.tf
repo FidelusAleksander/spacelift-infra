@@ -7,9 +7,21 @@ resource "spacelift_aws_integration" "this" {
   space_id                       = var.space_id
 }
 
-data "spacelift_aws_integration_attachment_external_id" "my_stack" {
+data "spacelift_aws_integration_attachment_external_id" "this" {
   integration_id = spacelift_aws_integration.this.id
   stack_id       = var.stack_id
   read           = true
   write          = true
+}
+
+resource "spacelift_aws_integration_attachment" "this" {
+  integration_id = spacelift_aws_integration.this.id
+  stack_id       = var.stack_id
+  read           = true
+  write          = true
+
+  # The role needs to exist before we attach since we test role assumption during attachment.
+  depends_on = [
+    aws_iam_role.this
+  ]
 }
