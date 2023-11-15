@@ -7,7 +7,7 @@ resource "spacelift_stack" "storage" {
   autodeploy              = true
   space_id                = spacelift_space.workloads-dev.id
   terraform_workflow_tool = "OPEN_TOFU"
-  terraform_version       = "1.6.0-alpha5"
+  terraform_version       = "1.6.0-alpha4"
 }
 
 module "storage_integration" {
