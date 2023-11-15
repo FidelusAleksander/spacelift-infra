@@ -1,11 +1,12 @@
 resource "spacelift_stack" "storage" {
-  name         = "Storage"
-  description  = "Provisions Storage Resources"
-  repository   = "spacelift-aws-demo"
-  project_root = "storage"
-  branch       = "master"
-  autodeploy   = true
-  space_id     = spacelift_space.workloads-dev.id
+  name                    = "Storage"
+  description             = "Provisions Storage Resources"
+  repository              = "spacelift-aws-demo"
+  project_root            = "storage"
+  branch                  = "master"
+  autodeploy              = true
+  space_id                = spacelift_space.workloads-dev.id
+  terraform_workflow_tool = "OPEN_TOFU"
 }
 
 module "storage_integration" {
