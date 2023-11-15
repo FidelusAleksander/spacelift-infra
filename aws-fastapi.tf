@@ -17,3 +17,14 @@ module "aws_fastapi_integration" {
   ]
   space_id = spacelift_space.workloads-dev.id
 }
+
+resource "spacelift_stack_dependency" "aws_fastapi_networking" {
+  stack_id            = spacelift_stack.aws_fastapi.id
+  depends_on_stack_id = spacelift_stack.networking.id
+}
+
+resource "spacelift_stack_dependency_reference" "aws_fastapi_networking_vpc_id" {
+  stack_dependency_id = spacelift_stack_dependency.aws_fastapi_networking.id
+  output_name         = "vpc_id"
+  input_name          = "TF_VAR_vpc_id"
+}
