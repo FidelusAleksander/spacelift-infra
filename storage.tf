@@ -16,5 +16,6 @@ module "storage_integration" {
     "arn:aws:iam::aws:policy/AmazonS3FullAccess",
     "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess"
   ]
-  space_id = spacelift_space.workloads-dev.id
+  space_id                = spacelift_space.workloads-dev.id
+  terraform_workflow_tool = "OPEN_TOFU"
 }
