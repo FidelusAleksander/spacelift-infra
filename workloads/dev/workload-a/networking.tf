@@ -10,7 +10,7 @@ resource "spacelift_stack" "networking" {
 }
 
 module "networking_integration" {
-  source    = "../modules/aws_integration"
+  source    = "../../workload-a/modules/aws_integration"
   role_name = "networking-spacelift-integration"
   stack_id  = spacelift_stack.networking.id
   iam_policy_arns = [

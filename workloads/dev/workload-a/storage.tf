@@ -11,7 +11,7 @@ resource "spacelift_stack" "storage" {
 }
 
 module "storage_integration" {
-  source    = "../modules/aws_integration"
+  source    = "../../workload-a/modules/aws_integration"
   role_name = "storage-spacelift-integration"
   stack_id  = spacelift_stack.storage.id
   iam_policy_arns = [
