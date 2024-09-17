@@ -43,14 +43,15 @@ Each workload manager stack **Does not include**
 Organization level infrastructure.
 
 **Includes**:
-- An AWS Role with minimal permissions
+
+- ~~An AWS Role with minimal permissions~~  -> Create roles manually, don't attach cloud integration to this manager stack. This stack manages stacks which deploy resources to **multiple** aws accounts.
 - A spacelift stack (probably single stack for that account)
-- A cloud integration for that stack (with the AWS role)
+- A cloud integration for that stack (with the AWS role that was manually created)
 - Plan/Push policies
 - Drift detection settings
+- Dependencies between stacks
+- Contexts for org-level stacks
 
 **Does not include**:
 - Creating spaces
 - Blueprints
-- Any contexts
-- Dependencies
