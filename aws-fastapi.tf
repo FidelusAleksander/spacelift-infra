@@ -9,7 +9,7 @@ resource "spacelift_stack" "aws_fastapi" {
 }
 
 resource "spacelift_aws_integration_attachment" "aws_demo_aws_fastapi" {
-  integration_id = spacelift_aws_integration.this.id
+  integration_id = spacelift_aws_integration.aws_demo.id
   stack_id       = spacelift_stack.aws_fastapi.id
   read           = true
   write          = true

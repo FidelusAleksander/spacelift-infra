@@ -11,8 +11,8 @@ resource "spacelift_stack" "storage" {
 }
 
 resource "spacelift_aws_integration_attachment" "aws_demo_storage" {
-  integration_id = spacelift_aws_integration.this.id
-  stack_id       = spacelift_stack.aws_fastapi.id
+  integration_id = spacelift_aws_integration.aws_demo.id
+  stack_id       = spacelift_stack.storage.id
   read           = true
   write          = true
 }
