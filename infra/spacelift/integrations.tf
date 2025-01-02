@@ -1,3 +1,4 @@
+## Spacelift Demo Project
 resource "spacelift_aws_integration" "spacelift_demo" {
   name = "spacelift_demo_integration"
 
@@ -34,3 +35,4 @@ resource "spacelift_aws_integration_attachment" "spacelift_demo_networking" {
   read           = true
   write          = true
 }
+

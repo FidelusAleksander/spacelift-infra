@@ -1,6 +1,19 @@
+resource "spacelift_stack" "shared_services_core" {
+  name                    = "Core - Shared Services"
+  description             = "Provisions Core Infrastructure for Shared Services account"
+  repository              = "spacelift-infra"
+  project_root            = "infra/shared-services/core"
+  branch                  = "master"
+  autodeploy              = true
+  space_id                = spacelift_space.workloads-dev.id
+  terraform_workflow_tool = local.default_terraform_workflow_tool
+  terraform_version       = local.default_terraform_version
+  labels                  = ["shared-services"]
+}
+
 resource "spacelift_stack" "spacelift_demo_core" {
   name                    = "Core - Spacelift Demo"
-  description             = "Provisions a FastAPI application on AWS"
+  description             = "Provisions Core Infrastructure for Spacelift Demo project"
   repository              = "spacelift-infra"
   project_root            = "infra/workloads/spacelift-demo/core"
   branch                  = "master"
