@@ -10,13 +10,9 @@ resource "spacelift_stack" "storage" {
   terraform_version       = "1.6.0-alpha4"
 }
 
-module "storage_integration" {
-  source    = "./modules/aws_integration"
-  role_name = "storage-spacelift-integration"
-  stack_id  = spacelift_stack.storage.id
-  iam_policy_arns = [
-    "arn:aws:iam::aws:policy/AmazonS3FullAccess",
-    "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess"
-  ]
-  space_id = spacelift_space.workloads-dev.id
+resource "spacelift_aws_integration_attachment" "aws_demo_storage" {
+  integration_id = spacelift_aws_integration.this.id
+  stack_id       = spacelift_stack.aws_fastapi.id
+  read           = true
+  write          = true
 }
