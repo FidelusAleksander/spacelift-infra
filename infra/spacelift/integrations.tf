@@ -19,3 +19,10 @@ resource "spacelift_aws_integration_attachment" "aws_demo_storage" {
   read           = true
   write          = true
 }
+
+resource "spacelift_aws_integration_attachment" "aws_demo_networking" {
+  integration_id = spacelift_aws_integration.aws_demo.id
+  stack_id       = spacelift_stack.networking.id
+  read           = true
+  write          = true
+}
