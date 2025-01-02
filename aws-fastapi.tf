@@ -8,14 +8,11 @@ resource "spacelift_stack" "aws_fastapi" {
   space_id     = spacelift_space.workloads-dev.id
 }
 
-module "aws_fastapi_integration" {
-  source    = "./modules/aws_integration"
-  role_name = "aws-fastapi-spacelift-integration"
-  stack_id  = spacelift_stack.aws_fastapi.id
-  iam_policy_arns = [
-    "arn:aws:iam::aws:policy/AdministratorAccess"
-  ]
-  space_id = spacelift_space.workloads-dev.id
+resource "spacelift_aws_integration_attachment" "aws_demo_aws_fastapi" {
+  integration_id = spacelift_aws_integration.aws_demo.id
+  stack_id       = spacelift_stack.aws_fastapi.id
+  read           = true
+  write          = true
 }
 
 resource "spacelift_stack_dependency" "aws_fastapi_networking" {
