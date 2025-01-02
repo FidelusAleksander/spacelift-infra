@@ -12,9 +12,3 @@ variable "spacelift_role_policy_arns" {
   description = "A list of policy ARNs to attach to the IAM role"
   type        = list(string)
 }
-
-variable "role_name" {
-  description = "The name of the IAM role"
-  type        = string
-  default     = "spacelift-role"
-}
