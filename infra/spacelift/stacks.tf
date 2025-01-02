@@ -1,11 +1,13 @@
 resource "spacelift_stack" "aws_fastapi" {
-  name         = "AWS Fastapi"
-  description  = "Provisions a FastAPI application on AWS"
-  repository   = "aws-fastapi"
-  project_root = "infra"
-  branch       = "master"
-  autodeploy   = true
-  space_id     = spacelift_space.workloads-dev.id
+  name                    = "AWS Fastapi"
+  description             = "Provisions a FastAPI application on AWS"
+  repository              = "aws-fastapi"
+  project_root            = "infra"
+  branch                  = "master"
+  autodeploy              = true
+  space_id                = spacelift_space.workloads-dev.id
+  terraform_workflow_tool = local.default_terraform_workflow_tool
+  terraform_version       = local.default_terraform_version
 }
 
 resource "spacelift_stack" "storage" {
@@ -16,19 +18,21 @@ resource "spacelift_stack" "storage" {
   branch                  = "master"
   autodeploy              = true
   space_id                = spacelift_space.workloads-dev.id
-  terraform_workflow_tool = "OPEN_TOFU"
-  terraform_version       = "1.6.0-alpha4"
+  terraform_workflow_tool = local.default_terraform_workflow_tool
+  terraform_version       = local.default_terraform_version
 }
 
 resource "spacelift_stack" "networking" {
-  name         = "Networking"
-  description  = "Provisions Networking Resources"
-  repository   = "spacelift-aws-demo"
-  project_root = "networking"
-  branch       = "master"
-  autodeploy   = true
-  space_id     = spacelift_space.workloads-dev.id
-  labels       = ["infracost"]
+  name                    = "Networking"
+  description             = "Provisions Networking Resources"
+  repository              = "spacelift-aws-demo"
+  project_root            = "networking"
+  branch                  = "master"
+  autodeploy              = true
+  space_id                = spacelift_space.workloads-dev.id
+  labels                  = ["infracost"]
+  terraform_workflow_tool = local.default_terraform_workflow_tool
+  terraform_version       = local.default_terraform_version
 }
 
 resource "spacelift_environment_variable" "infracost_api_key" {
