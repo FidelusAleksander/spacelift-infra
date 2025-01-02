@@ -1,16 +1,4 @@
-resource "spacelift_stack" "shared_services_core" {
-  name                    = "Core - Shared Services"
-  description             = "Provisions Core Infrastructure for Shared Services account"
-  repository              = "spacelift-infra"
-  project_root            = "infra/shared-services/core"
-  branch                  = "master"
-  autodeploy              = true
-  space_id                = spacelift_space.workloads-dev.id
-  terraform_workflow_tool = local.default_terraform_workflow_tool
-  terraform_version       = local.default_terraform_version
-  labels                  = ["shared-services"]
-}
-
+## Spacelift Demo
 resource "spacelift_stack" "spacelift_demo_core" {
   name                    = "Core - Spacelift Demo"
   description             = "Provisions Core Infrastructure for Spacelift Demo project"
@@ -92,4 +80,20 @@ resource "spacelift_stack_dependency_reference" "aws_fastapi_networking_s3_bucke
   stack_dependency_id = spacelift_stack_dependency.aws_fastapi_storage.id
   output_name         = "s3_bucket_name"
   input_name          = "TF_VAR_s3_bucket_name"
+}
+
+
+## Shared Services
+
+resource "spacelift_stack" "shared_services_core" {
+  name                    = "Core - Shared Services"
+  description             = "Provisions Core Infrastructure for Shared Services account"
+  repository              = "spacelift-infra"
+  project_root            = "infra/shared-services/core"
+  branch                  = "master"
+  autodeploy              = true
+  space_id                = spacelift_space.infrastructure.id
+  terraform_workflow_tool = local.default_terraform_workflow_tool
+  terraform_version       = local.default_terraform_version
+  labels                  = ["shared-services"]
 }
