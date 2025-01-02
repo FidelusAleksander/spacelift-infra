@@ -1,6 +1,7 @@
 variable "role_name" {
   description = "The name of the IAM role"
   type        = string
+  default     = "spacelift-role"
 }
 
 variable "spacelift_account_id" {
