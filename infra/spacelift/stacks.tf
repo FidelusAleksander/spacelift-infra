@@ -1,3 +1,17 @@
+resource "spacelift_stack" "spacelift_demo_core" {
+  name                    = "Core - Spacelift Demo"
+  description             = "Provisions a FastAPI application on AWS"
+  repository              = "spacelift-infra"
+  project_root            = "infra/workloads/spacelift-demo/core"
+  branch                  = "master"
+  autodeploy              = true
+  space_id                = spacelift_space.workloads-dev.id
+  terraform_workflow_tool = local.default_terraform_workflow_tool
+  terraform_version       = local.default_terraform_version
+  labels                  = ["spacelift-demo"]
+}
+
+
 resource "spacelift_stack" "aws_fastapi" {
   name                    = "AWS Fastapi"
   description             = "Provisions a FastAPI application on AWS"
@@ -8,7 +22,9 @@ resource "spacelift_stack" "aws_fastapi" {
   space_id                = spacelift_space.workloads-dev.id
   terraform_workflow_tool = local.default_terraform_workflow_tool
   terraform_version       = local.default_terraform_version
+  labels                  = ["spacelift-demo"]
 }
+
 
 resource "spacelift_stack" "storage" {
   name                    = "Storage"
@@ -20,6 +36,7 @@ resource "spacelift_stack" "storage" {
   space_id                = spacelift_space.workloads-dev.id
   terraform_workflow_tool = local.default_terraform_workflow_tool
   terraform_version       = local.default_terraform_version
+  labels                  = ["spacelift-demo"]
 }
 
 resource "spacelift_stack" "networking" {
@@ -30,7 +47,7 @@ resource "spacelift_stack" "networking" {
   branch                  = "master"
   autodeploy              = true
   space_id                = spacelift_space.workloads-dev.id
-  labels                  = ["infracost"]
+  labels                  = ["infracost", "spacelift-demo"]
   terraform_workflow_tool = local.default_terraform_workflow_tool
   terraform_version       = local.default_terraform_version
 }
