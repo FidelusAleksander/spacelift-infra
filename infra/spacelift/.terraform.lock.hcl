@@ -1,7 +1,7 @@
-# This file is maintained automatically by "terraform init".
+# This file is maintained automatically by "tofu init".
 # Manual edits may be lost in future updates.
 
-provider "registry.terraform.io/spacelift-io/spacelift" {
+provider "registry.opentofu.org/spacelift-io/spacelift" {
   version     = "1.19.0"
   constraints = "~> 1.5"
   hashes = [
