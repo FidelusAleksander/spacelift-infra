@@ -108,5 +108,5 @@ resource "spacelift_stack" "shared_services_github_runners" {
   space_id                = spacelift_space.infrastructure.id
   terraform_workflow_tool = local.default_terraform_workflow_tool
   terraform_version       = local.default_terraform_version
-  labels                  = ["shared-services"]
+  labels                  = ["shared-services", "infracost"]
 }
