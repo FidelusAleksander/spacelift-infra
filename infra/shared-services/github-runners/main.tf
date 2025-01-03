@@ -50,6 +50,9 @@ module "runners" {
 
   instance_types = ["m7a.large", "m5.large"]
 
+  # A value of 0 disables lambda from being triggered and -1 removes any concurrency limitations.
+  scale_up_reserved_concurrent_executions = -1
+
   # prefix GitHub runners with the environment name
   runner_name_prefix = "${local.environment}_"
 
