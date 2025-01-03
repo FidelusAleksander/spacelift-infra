@@ -57,3 +57,16 @@ module "runners" {
   runner_name_prefix = "${local.environment}_"
 
 }
+
+module "webhook_github_app" {
+  source     = "philips-labs/github-runner/aws//modules/webhook-github-app"
+  depends_on = [module.runners]
+
+    github_app = {
+    key_base64     = var.github_app.key_base64
+    id             = var.github_app.id
+    webhook_secret = random_id.random.hex
+  }
+  
+  webhook_endpoint = module.runners.webhook.endpoint
+}
