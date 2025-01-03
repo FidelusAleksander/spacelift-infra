@@ -97,3 +97,16 @@ resource "spacelift_stack" "shared_services_core" {
   terraform_version       = local.default_terraform_version
   labels                  = ["shared-services"]
 }
+
+resource "spacelift_stack" "shared_services_github_runners" {
+  name                    = "GitHub Self Hosted Runners"
+  description             = "Provisions AWS Infrastructure for GitHub Self Hosted Runners"
+  repository              = "spacelift-infra"
+  project_root            = "infra/shared-services/github-runners"
+  branch                  = "master"
+  autodeploy              = true
+  space_id                = spacelift_space.infrastructure.id
+  terraform_workflow_tool = local.default_terraform_workflow_tool
+  terraform_version       = local.default_terraform_version
+  labels                  = ["shared-services"]
+}
