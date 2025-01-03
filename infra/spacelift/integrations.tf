@@ -7,31 +7,15 @@ resource "spacelift_aws_integration" "spacelift_demo" {
   space_id                       = spacelift_space.workloads-dev.id
 }
 
-resource "spacelift_aws_integration_attachment" "spacelift_demo_core" {
+resource "spacelift_aws_integration_attachment" "spacelift_demo_attachments" {
+  for_each = {
+    spacelift_demo_core       = spacelift_stack.spacelift_demo_core.id
+    spacelift_demo_aws_fastapi = spacelift_stack.aws_fastapi.id
+    spacelift_demo_storage    = spacelift_stack.storage.id
+    spacelift_demo_networking = spacelift_stack.networking.id
+  }
   integration_id = spacelift_aws_integration.spacelift_demo.id
-  stack_id       = spacelift_stack.spacelift_demo_core.id
-  read           = true
-  write          = true
-}
-
-
-resource "spacelift_aws_integration_attachment" "spacelift_demo_aws_fastapi" {
-  integration_id = spacelift_aws_integration.spacelift_demo.id
-  stack_id       = spacelift_stack.aws_fastapi.id
-  read           = true
-  write          = true
-}
-
-resource "spacelift_aws_integration_attachment" "spacelift_demo_storage" {
-  integration_id = spacelift_aws_integration.spacelift_demo.id
-  stack_id       = spacelift_stack.storage.id
-  read           = true
-  write          = true
-}
-
-resource "spacelift_aws_integration_attachment" "spacelift_demo_networking" {
-  integration_id = spacelift_aws_integration.spacelift_demo.id
-  stack_id       = spacelift_stack.networking.id
+  stack_id       = each.value
   read           = true
   write          = true
 }
@@ -46,9 +30,13 @@ resource "spacelift_aws_integration" "shared_services" {
   space_id                       = spacelift_space.infrastructure.id
 }
 
-resource "spacelift_aws_integration_attachment" "shared_services_core" {
+resource "spacelift_aws_integration_attachment" "shared_services_attachments" {
+  for_each = {
+    shared_services_core         = spacelift_stack.shared_services_core.id
+    shared_services_github_runners = spacelift_stack.shared_services_core.id
+  }
   integration_id = spacelift_aws_integration.shared_services.id
-  stack_id       = spacelift_stack.shared_services_core.id
+  stack_id       = each.value
   read           = true
   write          = true
 }
