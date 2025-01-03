@@ -53,13 +53,6 @@ resource "spacelift_stack" "networking" {
   terraform_version       = local.default_terraform_version
 }
 
-resource "spacelift_environment_variable" "infracost_api_key" {
-  stack_id   = spacelift_stack.networking.id
-  name       = "INFRACOST_API_KEY"
-  value      = var.infracost_api_key
-  write_only = true
-}
-
 resource "spacelift_stack_dependency" "aws_fastapi_networking" {
   stack_id            = spacelift_stack.aws_fastapi.id
   depends_on_stack_id = spacelift_stack.networking.id
@@ -109,4 +102,17 @@ resource "spacelift_stack" "shared_services_github_runners" {
   terraform_workflow_tool = local.default_terraform_workflow_tool
   terraform_version       = local.default_terraform_version
   labels                  = ["shared-services", "infracost"]
+}
+
+## Infracost
+
+resource "spacelift_environment_variable" "infracost_api_key" {
+  for_each = {
+    networking                     = spacelift_stack.networking.id
+    shared_services_github_runners = spacelift_stack.shared_services_github_runners.id
+  }
+  stack_id   = each.value
+  name       = "INFRACOST_API_KEY"
+  value      = var.infracost_api_key
+  write_only = true
 }
