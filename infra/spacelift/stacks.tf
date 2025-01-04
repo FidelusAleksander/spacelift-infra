@@ -30,8 +30,8 @@ resource "spacelift_stack" "aws_fastapi" {
 resource "spacelift_stack" "storage" {
   name                    = "Storage"
   description             = "Provisions Storage Resources"
-  repository              = "spacelift-aws-demo"
-  project_root            = "storage"
+  repository              = "spacelift-infra"
+  project_root            = "infra/workloads/spacelift-demo/storage"
   branch                  = "master"
   autodeploy              = true
   space_id                = spacelift_space.workloads-dev.id
@@ -43,8 +43,8 @@ resource "spacelift_stack" "storage" {
 resource "spacelift_stack" "networking" {
   name                    = "Networking"
   description             = "Provisions Networking Resources"
-  repository              = "spacelift-aws-demo"
-  project_root            = "networking"
+  repository              = "spacelift-infra"
+  project_root            = "infra/workloads/spacelift-demo/networking"
   branch                  = "master"
   autodeploy              = true
   space_id                = spacelift_space.workloads-dev.id
