@@ -1,4 +1,6 @@
-# Spacelift Infrastructure Manager
+# OpenTofu Infrastructure
 
-Manages my Spacelift Infrastructure:
-e.g all the stacks and aws integrations for https://github.com/FidelusAleksander/spacelift-aws-demo repository
+This repository contains OpenTofu configurations for managing various infrastructure components across different environments.
+
+The infrastructure is deployed through [Spacelift](https://spacelift.io/).
+
