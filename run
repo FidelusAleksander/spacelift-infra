@@ -9,7 +9,6 @@ SPACELIFT_STACK_ID="spacelift-infrastructure"
 function spacelift:login {
 	# Login to spacelift
 
-	spacectl profile select "$SPACELIFT_PROFILE"
 	spacectl profile login \
 		--method browser \
 		--endpoint "https://$SPACELIFT_PROFILE.app.spacelift.io/" \
