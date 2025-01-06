@@ -3,7 +3,7 @@
 {
 	"name": "OpenTofu with Spacelift CLI",
 	"image": "mcr.microsoft.com/devcontainers/base:ubuntu-22.04",
-	
+
     // Features to add to the dev container. More info: https://containers.dev/features.
     "features": {
 		"ghcr.io/robbert229/devcontainer-features/opentofu:1": {
