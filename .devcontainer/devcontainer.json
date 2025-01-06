@@ -1,0 +1,34 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
+{
+	"name": "OpenTofu with Spacelift CLI",
+	"image": "mcr.microsoft.com/devcontainers/base:ubuntu-22.04",
+	
+    // Features to add to the dev container. More info: https://containers.dev/features.
+    "features": {
+		"ghcr.io/robbert229/devcontainer-features/opentofu:1": {
+            "version": "1.8.7"
+        },
+		"ghcr.io/devcontainers-extra/features/spacectl:1": {},
+        "ghcr.io/devcontainers-extra/features/pre-commit:2": {}
+	},
+	// Configure tool-specific properties.
+    "customizations": {
+        "vscode": {
+			"extensions": [
+				"github.copilot"
+			]
+		}
+    }
+
+
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "uname -a",
+
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
+}
