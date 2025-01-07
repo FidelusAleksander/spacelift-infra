@@ -3,14 +3,15 @@
 {
 	"name": "OpenTofu with Spacelift CLI",
 	"image": "mcr.microsoft.com/devcontainers/base:ubuntu-22.04",
-	
+
     // Features to add to the dev container. More info: https://containers.dev/features.
     "features": {
 		"ghcr.io/robbert229/devcontainer-features/opentofu:1": {
             "version": "1.8.7"
         },
 		"ghcr.io/devcontainers-extra/features/spacectl:1": {},
-        "ghcr.io/devcontainers-extra/features/pre-commit:2": {}
+        "ghcr.io/devcontainers-extra/features/pre-commit:2": {},
+		"ghcr.io/devcontainers-extra/features/opa:1": {}
 	},
 	// Configure tool-specific properties.
     "customizations": {
