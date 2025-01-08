@@ -6,7 +6,7 @@ resource "spacelift_stack" "spacelift_demo_core" {
   project_root            = "infra/workloads/spacelift-demo/core"
   branch                  = "master"
   autodeploy              = true
-  space_id                = spacelift_space.workloads-dev.id
+  space_id                = module.workload_spaces.spaces["dev"].id
   terraform_workflow_tool = local.default_terraform_workflow_tool
   terraform_version       = local.default_terraform_version
   labels                  = ["spacelift-demo"]
@@ -20,7 +20,7 @@ resource "spacelift_stack" "aws_fastapi" {
   project_root            = "infra"
   branch                  = "master"
   autodeploy              = true
-  space_id                = spacelift_space.workloads-dev.id
+  space_id                = module.workload_spaces.spaces["dev"].id
   terraform_workflow_tool = local.default_terraform_workflow_tool
   terraform_version       = local.default_terraform_version
   labels                  = ["spacelift-demo"]
@@ -34,7 +34,7 @@ resource "spacelift_stack" "storage" {
   project_root            = "infra/workloads/spacelift-demo/storage"
   branch                  = "master"
   autodeploy              = true
-  space_id                = spacelift_space.workloads-dev.id
+  space_id                = module.workload_spaces.spaces["dev"].id
   terraform_workflow_tool = local.default_terraform_workflow_tool
   terraform_version       = local.default_terraform_version
   labels                  = ["spacelift-demo"]
@@ -47,7 +47,7 @@ resource "spacelift_stack" "networking" {
   project_root            = "infra/workloads/spacelift-demo/networking"
   branch                  = "master"
   autodeploy              = true
-  space_id                = spacelift_space.workloads-dev.id
+  space_id                = module.workload_spaces.spaces["dev"].id
   labels                  = ["infracost", "spacelift-demo"]
   terraform_workflow_tool = local.default_terraform_workflow_tool
   terraform_version       = local.default_terraform_version
@@ -85,7 +85,7 @@ resource "spacelift_stack" "shared_services_core" {
   project_root            = "infra/shared-services/core"
   branch                  = "master"
   autodeploy              = true
-  space_id                = spacelift_space.infrastructure.id
+  space_id                = module.root_spaces.spaces["infrastructure"].id
   terraform_workflow_tool = local.default_terraform_workflow_tool
   terraform_version       = local.default_terraform_version
   labels                  = ["shared-services"]
@@ -98,7 +98,7 @@ resource "spacelift_stack" "shared_services_github_runners" {
   project_root            = "infra/shared-services/github-runners"
   branch                  = "master"
   autodeploy              = true
-  space_id                = spacelift_space.infrastructure.id
+  space_id                = module.root_spaces.spaces["infrastructure"].id
   terraform_workflow_tool = local.default_terraform_workflow_tool
   terraform_version       = local.default_terraform_version
   labels                  = ["shared-services", "infracost"]

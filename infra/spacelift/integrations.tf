@@ -4,7 +4,7 @@ resource "spacelift_aws_integration" "spacelift_demo" {
 
   role_arn                       = "arn:aws:iam::859006480097:role/spacelift-role"
   generate_credentials_in_worker = false
-  space_id                       = spacelift_space.workloads-dev.id
+  space_id                       = module.workload_spaces.spaces["dev"].id
 }
 
 resource "spacelift_aws_integration_attachment" "spacelift_demo_attachments" {
@@ -27,7 +27,7 @@ resource "spacelift_aws_integration" "shared_services" {
 
   role_arn                       = "arn:aws:iam::619071326466:role/spacelift-role"
   generate_credentials_in_worker = false
-  space_id                       = spacelift_space.infrastructure.id
+  space_id                       = module.root_spaces.spaces["infrastructure"].id
 }
 
 resource "spacelift_aws_integration_attachment" "shared_services_attachments" {
