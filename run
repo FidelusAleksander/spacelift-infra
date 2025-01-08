@@ -18,7 +18,6 @@ function spacelift:login {
 function spacelift:preview {
 	# Run terraform plan locally to check local changes
 
-	cd infra
 	spacectl stack local-preview --id "$SPACELIFT_STACK_ID"
 	cd -
 }
