@@ -3,6 +3,11 @@ variable "stack_name" {
   description = "The name of the Spacelift stack"
 }
 
+variable "project_root" {
+  type        = string
+  description = "The location of the Terraform/OpenTofu files within the repository"
+}
+
 variable "repository" {
   type        = string
   description = "The name of your infrastructure repo"
@@ -14,6 +19,7 @@ variable "space_id" {
   description = "Place the stack in the specified space_id."
   default     = "root"
 }
+
 
 variable "administrative" {
   type        = bool
@@ -98,11 +104,20 @@ variable "terraform_workflow_tool" {
   }
 }
 
-variable "aws_integration" {
-  description = "AWS integration configuration"
-  type = object({
-    integration_id = string
-    read           = optional(bool, true)
-    write          = optional(bool, true)
-  })
+variable "aws_integration_id" {
+  description = "AWS integration ID"
+  type        = string
+  default     = null
+}
+
+variable "aws_integration_read" {
+  description = "Indicates whether this attachment is used for read operations."
+  type        = bool
+  default     = true
+}
+
+variable "aws_integration_write" {
+  description = "Indicates whether this attachment is used for write operations."
+  type        = bool
+  default     = true
 }

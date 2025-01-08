@@ -9,7 +9,6 @@ resource "spacelift_aws_integration" "spacelift_demo" {
 
 resource "spacelift_aws_integration_attachment" "spacelift_demo_attachments" {
   for_each = {
-    spacelift_demo_core        = spacelift_stack.spacelift_demo_core.id
     spacelift_demo_aws_fastapi = spacelift_stack.aws_fastapi.id
     spacelift_demo_storage     = spacelift_stack.storage.id
     spacelift_demo_networking  = spacelift_stack.networking.id

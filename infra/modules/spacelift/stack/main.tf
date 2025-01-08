@@ -13,7 +13,7 @@ resource "spacelift_stack" "this" {
   terraform_version            = var.terraform_version
   labels                       = var.labels
   administrative               = var.administrative
-  enable_local_preview         = var.local_preview_enabled
+  enable_local_preview         = var.enable_local_preview
   manage_state                 = var.manage_state
   protect_from_deletion        = var.protect_from_deletion
   terraform_smart_sanitization = var.terraform_smart_sanitization
@@ -30,8 +30,10 @@ resource "spacelift_context_attachment" "this" {
 }
 
 resource "spacelift_aws_integration_attachment" "this" {
-  integration_id = var.aws_integration.integration_id
+  count = var.aws_integration_id != null ? 1 : 0
+
+  integration_id = var.aws_integration_id
   stack_id       = spacelift_stack.this.id
-  read           = var.aws_integration.read
-  write          = var.aws_integration.write
+  read           = var.aws_integration_read
+  write          = var.aws_integration_write
 }

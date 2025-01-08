@@ -1,16 +1,15 @@
 ## Spacelift Demo
-resource "spacelift_stack" "spacelift_demo_core" {
-  name                    = "Core - Spacelift Demo"
-  description             = "Provisions Core Infrastructure for Spacelift Demo project"
-  repository              = "spacelift-infra"
-  project_root            = "infra/workloads/spacelift-demo/core"
-  branch                  = "master"
-  autodeploy              = true
-  space_id                = module.workload_spaces.spaces["dev"].id
-  terraform_workflow_tool = local.default_terraform_workflow_tool
-  terraform_version       = local.default_terraform_version
-  labels                  = ["spacelift-demo"]
+module "stack" {
+  source             = "../modules/spacelift/stack"
+  stack_name         = "Core - Spacelift Demo"
+  description        = "Provisions Core Infrastructure for Spacelift Demo project"
+  project_root       = "infra/workloads/spacelift-demo/core"
+  autodeploy         = true
+  space_id           = module.workload_spaces.spaces["dev"].id
+  labels             = ["spacelift-demo"]
+  aws_integration_id = spacelift_aws_integration.spacelift_demo.id
 }
+
 
 
 resource "spacelift_stack" "aws_fastapi" {
