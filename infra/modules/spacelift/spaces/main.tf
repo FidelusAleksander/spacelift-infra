@@ -1,5 +1,5 @@
 resource "spacelift_space" "this" {
-  for_each = { for k, v in var.spaces : v.name => v }
+  for_each = var.spaces
 
   name             = each.value.name
   parent_space_id  = each.value.parent_space_id
