@@ -24,3 +24,19 @@ resource "spacelift_space" "infrastructure" {
   parent_space_id = "root"
   description     = "Contains all the resources common to the shared AWS infrastructure (e.g networking hub)."
 }
+
+
+module "spaces" {
+  source = "../modules/spacelift/spaces"
+
+  spaces = {
+    something-key = {
+      parent_space_id = "root"
+      name            = "something"
+    },
+    something-key2 = {
+      parent_space_id = "something-key"
+      name            = "something2"
+    }
+  }
+}
