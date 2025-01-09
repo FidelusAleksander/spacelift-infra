@@ -64,3 +64,13 @@ moved {
   from = spacelift_aws_integration_attachment.spacelift_demo_attachments["spacelift_demo_storage"]
   to   = module.stacks["spacelift_demo_storage"].spacelift_aws_integration_attachment.this[0]
 }
+
+moved {
+  from = spacelift_environment_variable.infracost_api_key["networking"]
+  to   = module.stacks["spacelift_demo_networking"].spacelift_environment_variable.infracost_api_key[0]
+}
+
+moved {
+  from = spacelift_environment_variable.infracost_api_key["shared_services_github_runners"]
+  to   = module.stacks["shared_services_github_runners"].spacelift_environment_variable.infracost_api_key[0]
+}

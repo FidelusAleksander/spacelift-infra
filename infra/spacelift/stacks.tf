@@ -39,6 +39,7 @@ locals {
       project_root       = "infra/workloads/spacelift-demo/networking"
       aws_integration_id = spacelift_aws_integration.spacelift_demo.id
       labels             = ["infracost", "spacelift-demo"]
+      enable_infracost   = true
     },
     shared_services_core = {
       stack_name         = "Shared Services Core"
@@ -55,6 +56,7 @@ locals {
       project_root       = "infra/shared-services/github-runners"
       aws_integration_id = spacelift_aws_integration.shared_services.id
       labels             = ["shared-services"]
+      enable_infracost   = true
     }
   }
 
@@ -69,18 +71,22 @@ module "stacks" {
   for_each = local.stack_configs
   source   = "../modules/spacelift/stack"
 
+  stack_name   = each.value.stack_name
+  project_root = each.value.project_root
+  description  = each.value.description
+  repository   = each.value.repository
+  space_id     = each.value.space_id
 
-  stack_name         = each.value.stack_name
-  description        = each.value.description
-  repository         = each.value.repository
-  project_root       = each.value.project_root
-  autodeploy         = each.value.autodeploy
-  space_id           = each.value.space_id
-  labels             = each.value.labels
-  aws_integration_id = each.value.aws_integration_id
+  autodeploy              = try(each.value.autodeploy, null)
+  labels                  = try(each.value.labels, [])
+  aws_integration_id      = try(each.value.aws_integration_id, null)
+  terraform_workflow_tool = try(each.value.terraform_workflow_tool, null)
+  terraform_version       = try(each.value.terraform_version, null)
 
-  terraform_workflow_tool = each.value.terraform_workflow_tool
-  terraform_version       = each.value.terraform_version
+  infracost = {
+    enabled = try(each.value.enable_infracost, null)
+    api_key = var.infracost_api_key
+  }
 }
 
 
@@ -109,16 +115,3 @@ module "stacks" {
 
 
 ## Shared Services
-
-## Infracost
-
-# resource "spacelift_environment_variable" "infracost_api_key" {
-#   for_each = {
-#     networking                     = spacelift_stack.networking.id
-#     shared_services_github_runners = spacelift_stack.shared_services_github_runners.id
-#   }
-#   stack_id   = each.value
-#   name       = "INFRACOST_API_KEY"
-#   value      = var.infracost_api_key
-#   write_only = true
-# }

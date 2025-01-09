@@ -37,3 +37,12 @@ resource "spacelift_aws_integration_attachment" "this" {
   read           = var.aws_integration_read
   write          = var.aws_integration_write
 }
+
+
+resource "spacelift_environment_variable" "infracost_api_key" {
+  count      = var.infracost.enabled ? 1 : 0
+  stack_id   = spacelift_stack.this.id
+  name       = "INFRACOST_API_KEY"
+  value      = var.infracost.api_key
+  write_only = true
+}

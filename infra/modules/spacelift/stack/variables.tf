@@ -121,3 +121,18 @@ variable "aws_integration_write" {
   type        = bool
   default     = true
 }
+
+
+variable "infracost" {
+  description = "Infracost configuration"
+  type = object({
+    api_key = optional(string, null)
+    enabled = optional(bool, false)
+  })
+  default = {}
+
+  validation {
+    condition     = !(var.infracost.enabled == true && (var.infracost.api_key == null || var.infracost.api_key == ""))
+    error_message = "You must provide infracost.api_key if infracost.enabled is set to true."
+  }
+}
