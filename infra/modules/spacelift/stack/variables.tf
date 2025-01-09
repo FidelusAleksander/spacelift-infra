@@ -3,6 +3,11 @@ variable "stack_name" {
   description = "The name of the Spacelift stack"
 }
 
+variable "project_root" {
+  type        = string
+  description = "The location of the Terraform/OpenTofu files within the repository"
+}
+
 variable "repository" {
   type        = string
   description = "The name of your infrastructure repo"
@@ -14,6 +19,7 @@ variable "space_id" {
   description = "Place the stack in the specified space_id."
   default     = "root"
 }
+
 
 variable "administrative" {
   type        = bool
@@ -60,7 +66,7 @@ variable "labels" {
 variable "enable_local_preview" {
   type        = bool
   description = "Indicates whether local preview runs can be triggered on this Stack"
-  default     = true
+  default     = false
 }
 
 variable "manage_state" {
@@ -98,11 +104,35 @@ variable "terraform_workflow_tool" {
   }
 }
 
-variable "aws_integration" {
-  description = "AWS integration configuration"
+variable "aws_integration_id" {
+  description = "AWS integration ID"
+  type        = string
+  default     = null
+}
+
+variable "aws_integration_read" {
+  description = "Indicates whether this attachment is used for read operations."
+  type        = bool
+  default     = true
+}
+
+variable "aws_integration_write" {
+  description = "Indicates whether this attachment is used for write operations."
+  type        = bool
+  default     = true
+}
+
+
+variable "infracost" {
+  description = "Infracost configuration"
   type = object({
-    integration_id = string
-    read           = optional(bool, true)
-    write          = optional(bool, true)
+    api_key = optional(string, null)
+    enabled = optional(bool, false)
   })
+  default = {}
+
+  validation {
+    condition     = !(var.infracost.enabled == true && (var.infracost.api_key == null || var.infracost.api_key == ""))
+    error_message = "You must provide infracost.api_key if infracost.enabled is set to true."
+  }
 }

@@ -1,3 +1,8 @@
+locals {
+  stack_labels = var.infracost.enabled ? concat(var.labels, ["infracost"]) : var.labels
+
+}
+
 resource "spacelift_stack" "this" {
   name        = var.stack_name
   branch      = var.branch
@@ -11,9 +16,9 @@ resource "spacelift_stack" "this" {
   space_id                     = var.space_id
   terraform_workflow_tool      = var.terraform_workflow_tool
   terraform_version            = var.terraform_version
-  labels                       = var.labels
+  labels                       = local.stack_labels
   administrative               = var.administrative
-  enable_local_preview         = var.local_preview_enabled
+  enable_local_preview         = var.enable_local_preview
   manage_state                 = var.manage_state
   protect_from_deletion        = var.protect_from_deletion
   terraform_smart_sanitization = var.terraform_smart_sanitization
@@ -30,8 +35,19 @@ resource "spacelift_context_attachment" "this" {
 }
 
 resource "spacelift_aws_integration_attachment" "this" {
-  integration_id = var.aws_integration.integration_id
+  count = var.aws_integration_id != null ? 1 : 0
+
+  integration_id = var.aws_integration_id
   stack_id       = spacelift_stack.this.id
-  read           = var.aws_integration.read
-  write          = var.aws_integration.write
+  read           = var.aws_integration_read
+  write          = var.aws_integration_write
+}
+
+
+resource "spacelift_environment_variable" "infracost_api_key" {
+  count      = var.infracost.enabled ? 1 : 0
+  stack_id   = spacelift_stack.this.id
+  name       = "INFRACOST_API_KEY"
+  value      = var.infracost.api_key
+  write_only = true
 }
