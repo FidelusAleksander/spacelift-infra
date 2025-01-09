@@ -1,3 +1,8 @@
+locals {
+  stack_labels = var.infracost.enabled ? concat(var.labels, ["infracost"]) : var.labels
+
+}
+
 resource "spacelift_stack" "this" {
   name        = var.stack_name
   branch      = var.branch
@@ -11,7 +16,7 @@ resource "spacelift_stack" "this" {
   space_id                     = var.space_id
   terraform_workflow_tool      = var.terraform_workflow_tool
   terraform_version            = var.terraform_version
-  labels                       = var.labels
+  labels                       = local.stack_labels
   administrative               = var.administrative
   enable_local_preview         = var.enable_local_preview
   manage_state                 = var.manage_state

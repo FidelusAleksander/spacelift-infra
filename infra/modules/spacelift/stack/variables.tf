@@ -66,7 +66,7 @@ variable "labels" {
 variable "enable_local_preview" {
   type        = bool
   description = "Indicates whether local preview runs can be triggered on this Stack"
-  default     = true
+  default     = false
 }
 
 variable "manage_state" {

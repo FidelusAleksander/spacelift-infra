@@ -38,20 +38,20 @@ locals {
       space_id           = module.workload_spaces.spaces["dev"].id
       project_root       = "infra/workloads/spacelift-demo/networking"
       aws_integration_id = spacelift_aws_integration.spacelift_demo.id
-      labels             = ["infracost", "spacelift-demo"]
+      labels             = ["spacelift-demo"]
       enable_infracost   = true
     },
     shared_services_core = {
-      stack_name         = "Shared Services Core"
-      description        = "Provisions Core Shared Services"
+      stack_name         = "Core - Shared Services"
+      description        = "Provisions Core Infrastructure for Shared Services account"
       space_id           = module.root_spaces.spaces["infrastructure"].id
       project_root       = "infra/shared-services/core"
       aws_integration_id = spacelift_aws_integration.shared_services.id
       labels             = ["shared-services"]
     },
     shared_services_github_runners = {
-      stack_name         = "GitHub Runners"
-      description        = "Provisions GitHub Runners"
+      stack_name         = "GitHub Self Hosted Runners"
+      description        = "Provisions AWS Infrastructure for GitHub Self Hosted Runners"
       space_id           = module.root_spaces.spaces["infrastructure"].id
       project_root       = "infra/shared-services/github-runners"
       aws_integration_id = spacelift_aws_integration.shared_services.id
