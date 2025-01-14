@@ -8,6 +8,7 @@ The infrastructure is deployed through [Spacelift](https://spacelift.io/).
 
 ## Repository Structure
 
+
 ```
 infra
 ├── modules                 # Reusable modules
