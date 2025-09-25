@@ -57,7 +57,6 @@ resource "spacelift_stack_destructor" "this" {
   depends_on = [
     spacelift_stack.this,
     spacelift_aws_integration_attachment.this,
-    spacelift_environment_variable.this,
     spacelift_context_attachment.this
   ]
   stack_id = spacelift_stack.this.id
