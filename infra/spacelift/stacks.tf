@@ -49,29 +49,28 @@ locals {
 
 }
 
-## Spacelift Demo
-module "stacks" {
-  for_each = local.stack_configs
-  source   = "../modules/spacelift/stack"
 
-  stack_name   = each.value.stack_name
-  project_root = each.value.project_root
-  description  = each.value.description
-  repository   = each.value.repository
-  space_id     = each.value.space_id
+# module "stacks" {
+#   for_each = local.stack_configs
+#   source   = "../modules/spacelift/stack"
 
-  autodeploy              = try(each.value.autodeploy, null)
-  labels                  = try(each.value.labels, [])
-  aws_integration_id      = try(each.value.aws_integration_id, null)
-  terraform_workflow_tool = try(each.value.terraform_workflow_tool, null)
-  terraform_version       = try(each.value.terraform_version, null)
+#   stack_name   = each.value.stack_name
+#   project_root = each.value.project_root
+#   description  = each.value.description
+#   repository   = each.value.repository
+#   space_id     = each.value.space_id
 
-  infracost = {
-    enabled = try(each.value.enable_infracost, null)
-    api_key = var.infracost_api_key
-  }
-}
+#   autodeploy              = try(each.value.autodeploy, null)
+#   labels                  = try(each.value.labels, [])
+#   aws_integration_id      = try(each.value.aws_integration_id, null)
+#   terraform_workflow_tool = try(each.value.terraform_workflow_tool, null)
+#   terraform_version       = try(each.value.terraform_version, null)
 
+#   infracost = {
+#     enabled = try(each.value.enable_infracost, null)
+#     api_key = var.infracost_api_key
+#   }
+# }
 
 # TODO: Create a module for stack dependencies
 
@@ -96,3 +95,4 @@ resource "spacelift_stack_dependency_reference" "aws_fastapi_networking_s3_bucke
   output_name         = "s3_bucket_name"
   input_name          = "TF_VAR_s3_bucket_name"
 }
+
