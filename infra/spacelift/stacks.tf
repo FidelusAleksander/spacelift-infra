@@ -40,15 +40,7 @@ locals {
       aws_integration_id = spacelift_aws_integration.spacelift_demo.id
       labels             = ["spacelift-demo"]
       enable_infracost   = true
-    },
-    shared_services_core = {
-      stack_name         = "Core - Shared Services"
-      description        = "Provisions Core Infrastructure for Shared Services account"
-      space_id           = module.root_spaces.spaces["infrastructure"].id
-      project_root       = "infra/shared-services/core"
-      aws_integration_id = spacelift_aws_integration.shared_services.id
-      labels             = ["shared-services"]
-    },
+    }
   }
 
   stack_configs = {
