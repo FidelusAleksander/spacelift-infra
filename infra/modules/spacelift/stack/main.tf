@@ -51,3 +51,18 @@ resource "spacelift_environment_variable" "infracost_api_key" {
   value      = var.infracost.api_key
   write_only = true
 }
+
+# Used to trigger the deletion of resources when a stack is destroyed
+resource "spacelift_stack_destructor" "this" {
+  depends_on = [
+    spacelift_stack.this,
+    spacelift_aws_integration_attachment.this,
+    spacelift_context_attachment.this
+  ]
+  stack_id = spacelift_stack.this.id
+}
+
+# Triggers the stack after creation
+resource "spacelift_run" "this" {
+  stack_id = spacelift_stack.this.id
+}
