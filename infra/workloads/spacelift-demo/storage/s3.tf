@@ -1,5 +1,6 @@
 resource "aws_s3_bucket" "this" {
   bucket = "fidel-spacelift-demo"
+  force_destroy = false
 }
 
 resource "aws_s3_bucket_public_access_block" "example" {
