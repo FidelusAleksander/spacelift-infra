@@ -49,15 +49,6 @@ locals {
       aws_integration_id = spacelift_aws_integration.shared_services.id
       labels             = ["shared-services"]
     },
-    shared_services_github_runners = {
-      stack_name         = "GitHub Self Hosted Runners"
-      description        = "Provisions AWS Infrastructure for GitHub Self Hosted Runners"
-      space_id           = module.root_spaces.spaces["infrastructure"].id
-      project_root       = "infra/shared-services/github-runners"
-      aws_integration_id = spacelift_aws_integration.shared_services.id
-      labels             = ["shared-services"]
-      enable_infracost   = true
-    }
   }
 
   stack_configs = {
